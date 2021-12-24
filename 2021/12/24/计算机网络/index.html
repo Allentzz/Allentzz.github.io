@@ -9,7 +9,7 @@
     
     <title>
         
-            手写Promise |
+            计算机网络 |
         
         Keep Theme
     </title>
@@ -118,7 +118,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">手写Promise</span>
+            <span class="title-hover-animation">计算机网络</span>
         </div>
 
         
@@ -136,7 +136,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-11-16 17:05:40
+        <i class="fas fa-edit"></i>&nbsp;2021-12-24 17:08:27
     </span>
     
     
@@ -153,7 +153,57 @@
         
 
         <div class="article-content markdown-body">
-            <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Promise</span>()</span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">executor</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.state = <span class="string">&#x27;pending&#x27;</span></span><br><span class="line">        <span class="built_in">this</span>.value = <span class="literal">null</span></span><br><span class="line">        <span class="built_in">this</span>.reson = <span class="literal">null</span></span><br><span class="line">        <span class="built_in">this</span>.resolveCallBack = []</span><br><span class="line">        <span class="built_in">this</span>.rejectCallBack = []</span><br><span class="line">        <span class="keyword">let</span> resolve = <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;pending&#x27;</span>)&#123;</span><br><span class="line">                <span class="built_in">this</span>.state = <span class="string">&#x27;fulfilled&#x27;</span></span><br><span class="line">                <span class="built_in">this</span>.value = value</span><br><span class="line">               	<span class="built_in">this</span>.resolveCallBack.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn())</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> reject = <span class="function"><span class="params">reson</span> =&gt;</span> &#123;</span><br><span class="line">        	<span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;pending&#x27;</span>)&#123;</span><br><span class="line">                <span class="built_in">this</span>.state = <span class="string">&#x27;rejected&#x27;</span></span><br><span class="line">                <span class="built_in">this</span>.reson = reson</span><br><span class="line">                <span class="built_in">this</span>.rejectCallBack.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn())</span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            executor(resolve, reject)</span><br><span class="line">        &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">            reject(err)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">then</span>(<span class="params">onFulfilled,onRejected</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;fulfilled&#x27;</span>)&#123;</span><br><span class="line">            onFulfilled(<span class="built_in">this</span>.value)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;rejected&#x27;</span>)&#123;</span><br><span class="line">            onRejected(<span class="built_in">this</span>.reson)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;pending&#x27;</span>)&#123;</span><br><span class="line">            <span class="built_in">this</span>.resolveCallBack.push(<span class="function">() =&gt;</span> &#123;onFulfilled(<span class="built_in">this</span>.value)&#125;)</span><br><span class="line">            <span class="built_in">this</span>.rejectCallBack.push(<span class="function">() =&gt;</span> &#123;onRejected(<span class="built_in">this</span>.reson)&#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">all</span>(<span class="params">list</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> resArr = []</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">            list.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">                item.then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    resArr.push(res)</span><br><span class="line">                    index++</span><br><span class="line">                    <span class="keyword">if</span>(index === list.length)&#123;</span><br><span class="line">                        resolve(resArr)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h5 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h5><ul>
+<li>GET 和 POST 的请求区别</li>
+<li>常见的HTTP请求方式<ul>
+<li>常见的HTTP请求头和响应头</li>
+<li>OPTIONS 请求方法和使用场景</li>
+<li>keep-alive的理解</li>
+</ul>
+</li>
+<li>HTTP1.0 和 HTTP1.1之间有什么区别</li>
+<li>HTTP1.1 和 HTTP2.0 的区别</li>
+<li>HTTP 请求报文和响应报文<ul>
+<li>HTTP 协议的优点和缺点</li>
+<li>URL组成部分</li>
+</ul>
+</li>
+</ul>
+<h5 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="HTTPS 协议"></a>HTTPS 协议</h5><ul>
+<li>什么是HTTPS 协议</li>
+<li>TLS/SSL的工作原理<ul>
+<li>HTTPS 通信握手过程</li>
+<li>HTTPS的特点</li>
+</ul>
+</li>
+<li>HTTPS 是如何保证安全性的</li>
+</ul>
+<h5 id="HTTP-状态码"><a href="#HTTP-状态码" class="headerlink" title="HTTP 状态码"></a>HTTP 状态码</h5><ul>
+<li>常见状态码</li>
+</ul>
+<h5 id="DNS协议"><a href="#DNS协议" class="headerlink" title="DNS协议"></a>DNS协议</h5><ul>
+<li>DNS 协议是什么</li>
+<li>DNS 完整的查询过程</li>
+</ul>
+<h5 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h5><ul>
+<li>OSI七层模型</li>
+<li>TCP/IP五层模型</li>
+</ul>
+<h5 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h5><ul>
+<li>TCP和UDP的概念及特点</li>
+<li>TCP和UDP的区别</li>
+<li>TCP和UDP的使用场景<ul>
+<li>TCP的重传机制</li>
+<li>TCP的拥塞控制机制</li>
+<li>TCP的流量控制机制</li>
+<li>TCP的可重传机制</li>
+</ul>
+</li>
+<li>TCP的三次握手和四次挥手</li>
+</ul>
+<h5 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h5><ul>
+<li>对WebSocket的理解</li>
+</ul>
 
         </div>
 
@@ -165,13 +215,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/11/17/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/"
+                           href="/2021/12/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">发布订阅模式</span>
+                                <span class="post-nav-title-item">浏览器安全</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -181,10 +231,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/11/05/JS%E6%89%8B%E5%86%99/"
+                           href="/2021/12/24/JavaScript%E5%9F%BA%E7%A1%80/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">JS手写题</span>
+                                <span class="post-nav-title-item">JavaScript基础</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">

@@ -9,7 +9,7 @@
     
     <title>
         
-            手写Promise |
+            JavaScript基础 |
         
         Keep Theme
     </title>
@@ -118,7 +118,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">手写Promise</span>
+            <span class="title-hover-animation">JavaScript基础</span>
         </div>
 
         
@@ -136,7 +136,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-11-16 17:05:40
+        <i class="fas fa-edit"></i>&nbsp;2021-12-24 17:08:17
     </span>
     
     
@@ -153,7 +153,84 @@
         
 
         <div class="article-content markdown-body">
-            <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Promise</span>()</span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">executor</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.state = <span class="string">&#x27;pending&#x27;</span></span><br><span class="line">        <span class="built_in">this</span>.value = <span class="literal">null</span></span><br><span class="line">        <span class="built_in">this</span>.reson = <span class="literal">null</span></span><br><span class="line">        <span class="built_in">this</span>.resolveCallBack = []</span><br><span class="line">        <span class="built_in">this</span>.rejectCallBack = []</span><br><span class="line">        <span class="keyword">let</span> resolve = <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;pending&#x27;</span>)&#123;</span><br><span class="line">                <span class="built_in">this</span>.state = <span class="string">&#x27;fulfilled&#x27;</span></span><br><span class="line">                <span class="built_in">this</span>.value = value</span><br><span class="line">               	<span class="built_in">this</span>.resolveCallBack.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn())</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> reject = <span class="function"><span class="params">reson</span> =&gt;</span> &#123;</span><br><span class="line">        	<span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;pending&#x27;</span>)&#123;</span><br><span class="line">                <span class="built_in">this</span>.state = <span class="string">&#x27;rejected&#x27;</span></span><br><span class="line">                <span class="built_in">this</span>.reson = reson</span><br><span class="line">                <span class="built_in">this</span>.rejectCallBack.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn())</span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            executor(resolve, reject)</span><br><span class="line">        &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">            reject(err)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">then</span>(<span class="params">onFulfilled,onRejected</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;fulfilled&#x27;</span>)&#123;</span><br><span class="line">            onFulfilled(<span class="built_in">this</span>.value)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;rejected&#x27;</span>)&#123;</span><br><span class="line">            onRejected(<span class="built_in">this</span>.reson)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.state === <span class="string">&#x27;pending&#x27;</span>)&#123;</span><br><span class="line">            <span class="built_in">this</span>.resolveCallBack.push(<span class="function">() =&gt;</span> &#123;onFulfilled(<span class="built_in">this</span>.value)&#125;)</span><br><span class="line">            <span class="built_in">this</span>.rejectCallBack.push(<span class="function">() =&gt;</span> &#123;onRejected(<span class="built_in">this</span>.reson)&#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">all</span>(<span class="params">list</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> resArr = []</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">            list.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">                item.then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    resArr.push(res)</span><br><span class="line">                    index++</span><br><span class="line">                    <span class="keyword">if</span>(index === list.length)&#123;</span><br><span class="line">                        resolve(resArr)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h5 id="JavaScript-基础"><a href="#JavaScript-基础" class="headerlink" title="JavaScript 基础"></a>JavaScript 基础</h5><ul>
+<li>new 操作符的实现原理</li>
+<li>数组的原生方法有哪些</li>
+<li>什么是DOM和BOM</li>
+<li>对类数组对象的理解，如何转化数组</li>
+<li>Javascript 为什么要进行变量提升，它导致了什么问题<ul>
+<li>JavaScript 脚本延迟加载的方式有哪些</li>
+<li>JavaScript 类数组对象的定义</li>
+<li>es6 模块与 CommonJS模块有什么异同</li>
+<li>如何判断一个对象是否属于某个类</li>
+<li>for…in 和 for…of 的区别</li>
+<li>数组遍历的方法有哪些</li>
+</ul>
+</li>
+</ul>
+<h5 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h5><ul>
+<li>JavaScript 有哪些数据类型，他们的区别</li>
+<li>数据类型检测的方式有哪些</li>
+<li>判断数组的方法有哪些</li>
+<li>null 和 undefined 的区别</li>
+<li>instanceof 操作的实现原理及实现</li>
+<li>为什么 0.1 + 0.2 !== 0.3, 如何让其相等</li>
+<li>== 操作符的强制类型转换规则<ul>
+<li>typeof null 的结果是什么，为什么</li>
+<li>JavaScript中如何进行隐式类型的转换</li>
+</ul>
+</li>
+</ul>
+<h5 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h5><ul>
+<li>let 、const、var的区别</li>
+<li>箭头函数与普通函数的区别<ul>
+<li>const 对象的属性可以修改吗</li>
+<li>箭头函数的this指向哪里</li>
+<li>对rest参数的理解</li>
+<li>ES6中模板语法与字符串的处理</li>
+</ul>
+</li>
+</ul>
+<h5 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h5><ul>
+<li>对原型、原型链的理解</li>
+<li>原型链指向<ul>
+<li>原型修改、重写</li>
+</ul>
+</li>
+</ul>
+<h5 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h5><ul>
+<li>对Promise的理解</li>
+<li>Promise的基本用法</li>
+<li>对 async/await 的理解</li>
+<li>async/await对比Promise的优势<ul>
+<li>异步编程的实现方法</li>
+<li>setTimeout、Promise、Async/Await的区别</li>
+<li>promise解决了什么问题</li>
+<li>await到底在等什么</li>
+<li>async/await的优势</li>
+</ul>
+</li>
+</ul>
+<h5 id="执行上下文-作用域链-闭包"><a href="#执行上下文-作用域链-闭包" class="headerlink" title="执行上下文/作用域链/闭包"></a>执行上下文/作用域链/闭包</h5><ul>
+<li>对闭包的理解</li>
+<li>对作用域、作用域链的理解</li>
+<li>对执行上下文的理解</li>
+</ul>
+<h5 id="this-call-apply-bind"><a href="#this-call-apply-bind" class="headerlink" title="this/call/apply/bind"></a>this/call/apply/bind</h5><ul>
+<li>对this对象的理解</li>
+<li>call() 和apply()的区别</li>
+<li>实现call、appl和bind 函数</li>
+</ul>
+<h5 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h5><ul>
+<li>对象创建的方式有哪些</li>
+<li>对象继承的方式有哪些</li>
+</ul>
+<h5 id="垃圾回收与内存泄露"><a href="#垃圾回收与内存泄露" class="headerlink" title="垃圾回收与内存泄露"></a>垃圾回收与内存泄露</h5><ul>
+<li>浏览器的垃圾回收机制<ul>
+<li>哪些情况会导致内存泄漏</li>
+</ul>
+</li>
+</ul>
 
         </div>
 
@@ -165,13 +242,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/11/17/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/"
+                           href="/2021/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">发布订阅模式</span>
+                                <span class="post-nav-title-item">计算机网络</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -181,10 +258,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/11/05/JS%E6%89%8B%E5%86%99/"
+                           href="/2021/11/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">JS手写题</span>
+                                <span class="post-nav-title-item">浏览器原理</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
