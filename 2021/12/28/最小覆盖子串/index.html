@@ -9,7 +9,7 @@
     
     <title>
         
-            浏览器跨域 |
+            最小覆盖子串 |
         
         Keep Theme
     </title>
@@ -118,7 +118,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">浏览器跨域</span>
+            <span class="title-hover-animation">最小覆盖子串</span>
         </div>
 
         
@@ -136,7 +136,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-10-15 14:23:49
+        <i class="fas fa-edit"></i>&nbsp;2021-12-28 10:42:00
     </span>
     
     
@@ -153,21 +153,25 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="1-跨域问题的来源"><a href="#1-跨域问题的来源" class="headerlink" title="1. 跨域问题的来源"></a>1. 跨域问题的来源</h3><p>跨域问题的来源是浏览器为了<strong>请求安全</strong>而引入的基于<strong>同源策略（Same-origin policy）</strong>的安全特性。同源策略是浏览器一个非常重要的安全策略，基于这个策略可以限制非同源的内容与当前页面进行交互，从而减少页面被攻击的可能性。</p>
-<p>当页面和请求的<strong>协议</strong>、<strong>主机名</strong>或<strong>端口</strong>不同时，浏览器判定两者不同源，从而产生跨域。需要注意的是跨域是<strong>浏览器的限制</strong>，实际请求已经正常发出和响应了。</p>
-<h3 id="2-如何判定跨域"><a href="#2-如何判定跨域" class="headerlink" title="2. 如何判定跨域"></a>2. 如何判定跨域</h3><p><img src="https://user-images.githubusercontent.com/3984824/126035945-024df466-a92f-4564-82c5-cb5d54d66466.png" alt="cors"></p>
-<p>如上图所示，一个 origin 由<strong>协议（Protocol）</strong>、<strong>主机名（Host）</strong>和<strong>端口（Port）</strong>组成，这三块也是同源策略的判定条件，只有当<strong>协议</strong>、<strong>主机名</strong>和<strong>端口</strong>都相同时，浏览器才判定两者是同源关系，否则即为跨域。</p>
-<h3 id="3-跨域的解决方案"><a href="#3-跨域的解决方案" class="headerlink" title="3. 跨域的解决方案"></a>3. 跨域的解决方案</h3><p>前端常见的跨域解决方案有 CORS、反代、JSONP 等。</p>
-<h4 id="3-1-CORS-Cross-Origin-Resource-Sharing"><a href="#3-1-CORS-Cross-Origin-Resource-Sharing" class="headerlink" title="3.1 CORS (Cross-Origin Resource Sharing)"></a>3.1 CORS (Cross-Origin Resource Sharing)</h4><h4 id="CORS-是目前最为广泛的解决跨域问题的方案。方案依赖服务端-后端在响应头中添加-Access-Control-Allow-头，告知浏览器端通过此请求。"><a href="#CORS-是目前最为广泛的解决跨域问题的方案。方案依赖服务端-后端在响应头中添加-Access-Control-Allow-头，告知浏览器端通过此请求。" class="headerlink" title="CORS 是目前最为广泛的解决跨域问题的方案。方案依赖服务端/后端在响应头中添加 Access-Control-Allow-* 头，告知浏览器端通过此请求。"></a>CORS 是目前最为广泛的解决跨域问题的方案。方案依赖服务端/后端在响应头中添加 <code>Access-Control-Allow-*</code> 头，告知浏览器端通过此请求。</h4><p><strong>涉及到的端</strong></p>
-<p>CORS 只需要服务端/后端支持即可，不涉及前端改动。</p>
-<h4 id="3-2-反向代理"><a href="#3-2-反向代理" class="headerlink" title="3.2 反向代理"></a>3.2 反向代理</h4><p>反向代理解决跨域问题的方案依赖同源的服务端对请求做一个转发处理，将请求从跨域请求转换成同源请求。</p>
-<p><strong>涉及到的端</strong></p>
-<p>反向代理只需要服务端/后端支持，几乎不涉及前端改动，只用切换接口即可。</p>
-<p><strong>具体实现方式</strong></p>
-<p>反向代理的实现方式为在页面同域下配置一套反向代理服务，页面请求同域的服务端，服务端请求上游的实际的服务端，之后将结果返回给前端。</p>
-<h4 id="3-3-JSONP"><a href="#3-3-JSONP" class="headerlink" title="3.3 JSONP"></a>3.3 JSONP</h4><p>JSONP 是一个相对古老的跨域解决方案。主要是利用了浏览器加载 JavaScript 资源文件时不受同源策略的限制而实现跨域获取数据。</p>
-<p><strong>涉及到的端</strong></p>
-<p>JSONP 需要服务端和前端配合实现。</p>
+            <h4 id="LeetCode-76-最小覆盖子串"><a href="#LeetCode-76-最小覆盖子串" class="headerlink" title="LeetCode 76 最小覆盖子串"></a>LeetCode 76 最小覆盖子串</h4><p>给你一个字符串 <code>s</code> 、一个字符串<code> t</code> 。返回<code> s</code> 中涵盖 <code>t</code> 所有字符的最小子串。如果<code>s</code>中不存在涵盖<code> t</code> 所有字符的子串，则返回空字符串 <code>&quot;&quot; </code>。</p>
+<p>注意：</p>
+<p>对于<code>t</code>中重复字符，我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。<br>如果 <code>s</code> 中存在这样的子串，我们保证它是唯一的答案。</p>
+<p>示例 1：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;ADOBECODEBANC&quot;, t = &quot;ABC&quot;</span><br><span class="line">输出：&quot;BANC&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;a&quot;, t = &quot;a&quot;</span><br><span class="line">输出：&quot;a&quot;</span><br></pre></td></tr></table></figure>
+
+
+<p>示例 3:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入: s = &quot;a&quot;, t = &quot;aa&quot;</span><br><span class="line">输出: &quot;&quot;</span><br><span class="line">解释: t 中两个字符 &#x27;a&#x27; 均应包含在 s 的子串中，</span><br><span class="line">因此没有符合条件的子字符串，返回空字符串。</span><br></pre></td></tr></table></figure>
+
+<p>提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length, t.length &lt;= 105</span><br><span class="line">s 和 t 由英文字母组成</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">t</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minWindow = <span class="function"><span class="keyword">function</span>(<span class="params">s, t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> need = &#123;&#125; <span class="comment">// 子串各字符出现的频数</span></span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">window</span> = &#123;&#125; <span class="comment">// 滑动窗口的字符出现的频数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> a <span class="keyword">of</span> t)&#123;</span><br><span class="line">        need[a] = (need[a] || <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, <span class="comment">// 左指针</span></span><br><span class="line">        right = <span class="number">0</span> <span class="comment">// 右指针</span></span><br><span class="line">    <span class="keyword">let</span> vaild = <span class="number">0</span> <span class="comment">// window 窗口中符合子串中字符的种类</span></span><br><span class="line">    <span class="keyword">let</span> start = <span class="number">0</span>, <span class="comment">// 窗口开始位置</span></span><br><span class="line">        len = <span class="built_in">Number</span>.MAX_VALUE <span class="comment">// 滑窗长度</span></span><br><span class="line">    <span class="keyword">while</span>(right &lt; s.length)&#123;</span><br><span class="line">        <span class="keyword">let</span> c = s[right] <span class="comment">// 右指针往前走</span></span><br><span class="line">        right++</span><br><span class="line">        <span class="keyword">if</span>(need[c])&#123;   <span class="comment">// 出现need中的字符</span></span><br><span class="line">            <span class="built_in">window</span>[c] = (<span class="built_in">window</span>[c] || <span class="number">0</span>) + <span class="number">1</span> <span class="comment">// 添加进window滑窗中</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">window</span>[c] === need[c])&#123;  <span class="comment">// 判断滑窗中该字符数量与need中数量是否一致</span></span><br><span class="line">                vaild++  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 判断是否在滑窗中已经获取need的全部字符,然后就收缩窗口</span></span><br><span class="line">        <span class="keyword">while</span>(vaild === <span class="built_in">Object</span>.keys(need).length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(right - left &lt; len)&#123;</span><br><span class="line">                start = left</span><br><span class="line">                len = right - left</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">let</span> d = s[left]  <span class="comment">// 需要被移除的字符</span></span><br><span class="line">            left++</span><br><span class="line">            <span class="keyword">if</span>(need[d])&#123; <span class="comment">// 如果被移除的字符在need中，就更新window滑窗中的字符数</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">window</span>[d] === need[d]) &#123; </span><br><span class="line">                    <span class="comment">// 如果滑窗和need的字符数量一致时，字符种类减一</span></span><br><span class="line">                    vaild--</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">window</span>[d]--</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len === <span class="built_in">Number</span>.MAX_VALUE ? <span class="string">&quot;&quot;</span> : s.substr(start,len)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
 
         </div>
 
@@ -176,21 +180,21 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/10/15/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98/"
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/"
                         >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">浏览器缓存</span>
-                                <span class="post-nav-item">Prev posts</span>
+                                <span class="post-nav-title-item">浏览器安全</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
                             </span>
                         </a>
                     </div>
-                
                 
             </div>
         
